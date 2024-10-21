@@ -1,7 +1,19 @@
 <?php
 include "connection.php";
 
-$data = queryku("SELECT * FROM tb_person");
+/**
+ *  $data = queryku("SELECT per.id, per.nama, per.ktp, per.tgl_daftar, adr.alamat 
+* FROM tb_person as per 
+* JOIN tb_alamat as adr 
+* ON per.alamat = adr.id");
+*tb_person as per 'as' adalah alias utk mempersingkat nama table
+
+ */
+
+$data = queryku("SELECT per.id, per.nama, per.ktp, per.tgl_daftar, adr.alamat 
+FROM tb_person as per 
+JOIN tb_alamat as adr 
+ON per.alamat = adr.id");
 
 // var_dump($data);
 
@@ -33,7 +45,7 @@ $data = queryku("SELECT * FROM tb_person");
 
                     <h3 class="mb-4">Data RW Bajuri</h3>
 
-                    <a href="tb_person-insert.php" class="btn btn-success">Tambah Data +</a>
+                    <a href="tb_person-insert.php" class="btn btn-success">Tambah Data + </a>
 
                     <?php if (isset($_GET['messages'])): ?>
                         <p color="red">
@@ -49,6 +61,8 @@ $data = queryku("SELECT * FROM tb_person");
 
                                 <th scope="col">Nama</th>
                                 <th scope="col">KTP</th>
+                                <th scope="col">Alamat</th>
+                                <th scope="col">Tanggal Daftar</th>
 
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -71,11 +85,14 @@ $data = queryku("SELECT * FROM tb_person");
 
                                 <tr>
                                     <td> <?php echo $nomor_urut++ . "." ?> </td>
+
                                     <td><?php echo $row["nama"] ?></td>
                                     <td><?php echo $row["ktp"] ?></td>
+                                    <td><?php echo $row["alamat"] ?></td>
+                                    <td><?php echo $row["tgl_daftar"] ?></td>
 
                                     <td>
-                                        <a href="function.php?action=edit&id=<?php echo $row["id"] ?>"
+                                        <a href="tb_person-edit.php?id=<?php echo $row["id"] ?>"
                                             class="btn btn-primary">Edit</a>
                                         <a href="function.php?action=delete&id=<?php echo $row["id"] ?>"
                                             class="btn btn-outline-danger"
@@ -85,7 +102,7 @@ $data = queryku("SELECT * FROM tb_person");
 
                             <?php endforeach; ?>
 
-                            >
+
                     </table>
 
 

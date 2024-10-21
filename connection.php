@@ -13,11 +13,6 @@ $conn = mysqli_connect($hostname, $user, $password, $database_name);
 // var_dump($conn);
 
 
-
-if ($conn->connect_error) {
-    die("Koneksi Gagal: " . $conn->connect_error);
-}
-
 // mengambil data (fetching)
 /** ada beberapa jenis fetch
  * mysqli_fetch_row()
@@ -42,6 +37,12 @@ function queryku($query)
     return $returns;
 
 }
+
+if ($conn->connect_error) {
+    die("Koneksi Gagal: " . $conn->connect_error);
+}
+
+
 
 
 ?>
